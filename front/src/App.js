@@ -15,7 +15,7 @@ const App = () => {
     toAlt: '',
     toLong: '',
   })
-  const [distance, setDistance] = useState({})
+  const [distance, setDistance] = useState([])
   // useEffect(() => {
   //   setDistance('')
   // }, [])
@@ -29,8 +29,8 @@ const App = () => {
         'http://localhost:5050/travels/v1/distance',
         coordinate
       )
-      setDistance(res.data)
-      console.log(res.data.distance)
+      setDistance([res.data, ...distance])
+      console.log(res)
       console.log(distance)
     } catch (error) {
       console.log(error)
@@ -93,8 +93,11 @@ const App = () => {
       />
       <Container className="mt-4">
         <h4>Results</h4>
-        <DistanseCard distance={distance} />
-        <DistanseCard distance={distance} />
+        {distance.map((distance, i) => (
+          <DistanseCard key={i} distance={distance} />
+        ))}
+        {/* <DistanseCard distance={distance} />
+        <DistanseCard distance={distance} /> */}
       </Container>
     </div>
   )
