@@ -26,7 +26,7 @@ const App = () => {
 
     try {
       const res = await axios.post(
-        'http://localhost:5050/travels/v1/distance',
+        'http://localhost:5050/travels/v1/new-distance',
         coordinate
       )
       setDistance([res.data, ...distance])
@@ -68,6 +68,32 @@ const App = () => {
       toLong: '',
     })
   }
+  const handleSaveDistance = async (id) => {
+    const distanceToBeSaved = distance.find((distance) => distance.id === id)
+
+    try {
+      const res = await axios.post(
+        'http://localhost:5050/travels/v1/distances',
+        distanceToBeSaved
+      )
+      console.log(res.data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const deleteDistance = async (id) => {
+    try {
+      const res = await axios.delete(
+        'http://localhost:5050/travels/v1/distances',
+        { data: { id: id } }
+      )
+      console.log(res.data)
+      setDistance(distance.filter((item) => item.id !== id))
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   function handleChange(event) {
     const value = event.target.value
@@ -94,7 +120,12 @@ const App = () => {
       <Container className="mt-4">
         <h4>Results</h4>
         {distance.map((distance, i) => (
-          <DistanseCard key={i} distance={distance} />
+          <DistanseCard
+            key={i}
+            distance={distance}
+            saveDistance={handleSaveDistance}
+            deleteDistance={deleteDistance}
+          />
         ))}
         {/* <DistanseCard distance={distance} />
         <DistanseCard distance={distance} /> */}

@@ -2,16 +2,24 @@ import React from 'react'
 import Button from 'react-bootstrap/Button'
 import './DistanceCard.css'
 
-const DistanseCard = ({ distance }) => {
+const DistanseCard = ({ distance, saveDistance, deleteDistance }) => {
   return (
     distance && (
       <div className="wrapDistance">
         Distanse is: {distance.distance}
         <div>
-          <Button className="me-2" variant="secondary">
+          <Button
+            className="me-2"
+            variant="secondary"
+            onClick={() => deleteDistance(distance.id)}
+          >
             Delete
           </Button>
-          <Button className="me-2" variant="success">
+          <Button
+            className="me-2"
+            variant="success"
+            onClick={() => saveDistance(distance.id)}
+          >
             Save
           </Button>
         </div>
