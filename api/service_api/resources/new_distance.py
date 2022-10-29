@@ -5,7 +5,7 @@ from geopy import distance
 
 
 
-class DistanceResource(Resource):
+class NewDistanceResource(Resource):
     def post(self):
         r = request.get_json()
         start = (r.get('fromAlt'), r.get('fromLong'))
