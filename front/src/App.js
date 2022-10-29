@@ -15,11 +15,20 @@ const App = () => {
     toAlt: '',
     toLong: '',
   })
-  const [distance, setDistance] = useState([])
-  // useEffect(() => {
-  //   setDistance('')
-  // }, [])
-  console.log(distance)
+  const [distances, setDistance] = useState([])
+  useEffect(() => {
+    ;(async function () {
+      try {
+        const res = await axios.get(
+          'http://localhost:5050/travels/v1/distances'
+        )
+        setDistance(res.data || [])
+      } catch (error) {
+        console.log(error)
+      }
+    })()
+  }, [])
+  console.log(distances)
 
   const handleSearchSubmit = async (e) => {
     e.preventDefault()
@@ -29,9 +38,9 @@ const App = () => {
         'http://localhost:5050/travels/v1/new-distance',
         coordinate
       )
-      setDistance([res.data, ...distance])
+      setDistance([res.data, ...distances])
       console.log(res)
-      console.log(distance)
+      console.log(distances)
     } catch (error) {
       console.log(error)
     }
@@ -69,14 +78,24 @@ const App = () => {
     })
   }
   const handleSaveDistance = async (id) => {
-    const distanceToBeSaved = distance.find((distance) => distance.id === id)
+    const distanceToBeSaved = distances.find((distance) => distance.id === id)
+    distanceToBeSaved.saved = true
 
     try {
       const res = await axios.post(
         'http://localhost:5050/travels/v1/distances',
         distanceToBeSaved
       )
+      if (res.data?.inserted_id) {
+        setDistance(
+          distances.map((distance) =>
+            distance.id === id ? { ...distance, saved: true } : distance
+          )
+        )
+      }
+
       console.log(res.data)
+      console.log(res.status)
     } catch (error) {
       console.log(error)
     }
@@ -89,7 +108,7 @@ const App = () => {
         { data: { id: id } }
       )
       console.log(res.data)
-      setDistance(distance.filter((item) => item.id !== id))
+      setDistance(distances.filter((distance) => distance.id !== id))
     } catch (error) {
       console.log(error)
     }
@@ -110,6 +129,15 @@ const App = () => {
     <div>
       <Header title="Geo app" />
 
+      <Container className="mt-4">
+        <h3>Weather</h3>
+      </Container>
+
+      <hr />
+      <Container className="mt-4">
+        <h3>Measuring</h3>
+      </Container>
+
       <Search
         handleSubmit={handleSearchSubmit}
         coordinate={coordinate}
@@ -119,7 +147,7 @@ const App = () => {
       />
       <Container className="mt-4">
         <h4>Results</h4>
-        {distance.map((distance, i) => (
+        {distances.map((distance, i) => (
           <DistanseCard
             key={i}
             distance={distance}

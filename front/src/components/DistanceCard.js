@@ -15,12 +15,22 @@ const DistanseCard = ({ distance, saveDistance, deleteDistance }) => {
           >
             Delete
           </Button>
+          {/* {!distance.saved && (
+            <Button
+              className="me-2"
+              variant="success"
+              onClick={() => saveDistance(distance.id)}
+            >
+              Save
+            </Button>
+          )} */}
           <Button
+            disabled={distance.saved}
             className="me-2"
-            variant="success"
+            variant={distance.saved ? 'success' : 'primary'}
             onClick={() => saveDistance(distance.id)}
           >
-            Save
+            {distance.saved ? 'Saved' : 'Save'}
           </Button>
         </div>
       </div>
