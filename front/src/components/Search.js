@@ -25,7 +25,7 @@ const Search = ({
                   name="fromAlt"
                   value={coordinate.fromAlt}
                   onChange={handleChange}
-                  placeholder="Enter altitude"
+                  placeholder="Enter latitude"
                 />
               </Form.Group>
 
@@ -47,7 +47,7 @@ const Search = ({
                   name="toAlt"
                   value={coordinate.toAlt}
                   onChange={handleChange}
-                  placeholder="Enter altitude"
+                  placeholder="Enter latitude"
                 />
               </Form.Group>
 
