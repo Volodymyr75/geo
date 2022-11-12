@@ -11,6 +11,7 @@ const Search = ({
   coordinate,
   setCoordinate,
   handleChange,
+  errors,
 }) => {
   return (
     <Container className="mt-4">
@@ -19,14 +20,18 @@ const Search = ({
           <Form onSubmit={handleSubmit}>
             <Row className="mb-3">
               <Form.Text className="text-muted pb-2">From</Form.Text>
-              <Form.Group as={Col} controlId="formFromAlt">
+              <Form.Group as={Col} controlId="formFromLat">
                 <Form.Control
                   type="text"
-                  name="fromAlt"
-                  value={coordinate.fromAlt}
+                  name="fromLat"
+                  value={coordinate.fromLat}
                   onChange={handleChange}
                   placeholder="Enter latitude"
+                  isInvalid={!!errors.fromLat}
                 />
+                <Form.Control.Feedback type="invalid">
+                  {errors.fromLat}
+                </Form.Control.Feedback>
               </Form.Group>
 
               <Form.Group as={Col} controlId="formFromLong">
@@ -36,19 +41,27 @@ const Search = ({
                   value={coordinate.fromLong}
                   onChange={handleChange}
                   placeholder="Enter longitude"
+                  isInvalid={!!errors.fromLong}
                 />
+                <Form.Control.Feedback type="invalid">
+                  {errors.fromLong}
+                </Form.Control.Feedback>
               </Form.Group>
             </Row>
             <Row className="mb-3">
               <Form.Text className="text-muted pb-2">To</Form.Text>
-              <Form.Group as={Col} controlId="formToAlt">
+              <Form.Group as={Col} controlId="formToLat">
                 <Form.Control
                   type="text"
-                  name="toAlt"
-                  value={coordinate.toAlt}
+                  name="toLat"
+                  value={coordinate.toLat}
                   onChange={handleChange}
                   placeholder="Enter latitude"
+                  isInvalid={!!errors.toLat}
                 />
+                <Form.Control.Feedback type="invalid">
+                  {errors.toLat}
+                </Form.Control.Feedback>
               </Form.Group>
 
               <Form.Group as={Col} controlId="formToLong">
@@ -58,7 +71,11 @@ const Search = ({
                   value={coordinate.toLong}
                   onChange={handleChange}
                   placeholder="Enter longitude"
+                  isInvalid={!!errors.toLong}
                 />
+                <Form.Control.Feedback type="invalid">
+                  {errors.toLong}
+                </Form.Control.Feedback>
               </Form.Group>
             </Row>
             <Row>

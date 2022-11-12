@@ -7,6 +7,7 @@ from service_api.resources.smoke import SmokeTestResource
 from service_api.resources.new_distance import NewDistanceResource
 from service_api.resources.distances import DistancesResource
 from service_api.resources.new_weather import NewWeatherResource
+from service_api.resources.weathers import WeathersResource
 
 app = Flask(__name__)
 CORS(app)
@@ -24,3 +25,6 @@ api.add_resource(DistancesResource, '/distances', strict_slashes=False)
 
 # new weather
 api.add_resource(NewWeatherResource, '/new-weather', strict_slashes=False)
+
+# weathers
+api.add_resource(WeathersResource, '/weathers', strict_slashes=False)
