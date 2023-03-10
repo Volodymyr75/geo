@@ -1,10 +1,14 @@
 import uuid
+import os
+from dotenv import load_dotenv
 import requests
 from flask import jsonify, request
 from flask_restful import Resource
 
-API_KEY = 'e83c91e26c6d44afe21e3a873ca094b9'
-UNITS = 'metric'
+load_dotenv()
+
+API_KEY = os.getenv('API_KEY')
+UNITS = os.environ.get('UNITS')
 
 
 class NewWeatherResource(Resource):
