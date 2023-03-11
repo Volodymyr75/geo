@@ -21,7 +21,8 @@ const Home = () => {
     ;(async function () {
       try {
         const res = await axios.get(
-          'http://localhost:5050/travels/v1/distances'
+          // 'http://localhost:5050/travels/v1/distances'
+          'https://strembovskyi-geo.onrender.com/travels/v1/distances'
         )
         setDistance(res.data || [])
       } catch (error) {
@@ -42,7 +43,8 @@ const Home = () => {
     } else {
       try {
         const res = await axios.post(
-          'http://localhost:5050/travels/v1/new-distance',
+          // 'http://localhost:5050/travels/v1/new-distance',
+          'https://strembovskyi-geo.onrender.com/travels/v1/new-distance',
           coordinate
         )
         setDistance([res.data, ...distances])
@@ -93,7 +95,8 @@ const Home = () => {
 
     try {
       const res = await axios.post(
-        'http://localhost:5050/travels/v1/distances',
+        // 'http://localhost:5050/travels/v1/distances',
+        'https://strembovskyi-geo.onrender.com/travels/v1/distances',
         distanceToBeSaved
       )
       if (res.data?.inserted_id) {
@@ -114,7 +117,8 @@ const Home = () => {
   const deleteDistance = async (id) => {
     try {
       const res = await axios.delete(
-        'http://localhost:5050/travels/v1/distances',
+        // 'http://localhost:5050/travels/v1/distances',
+        'https://strembovskyi-geo.onrender.com/travels/v1/distances',
         { data: { id: id } }
       )
       console.log(res.data)

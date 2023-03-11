@@ -57,6 +57,7 @@ function Weather() {
     try {
       const res = await axios.post(
         'http://localhost:5050/travels/v1/weathers',
+        // 'https://strembovskyi-geo.onrender.com/travels/v1/weathers',
         weatherToBeSaved
       )
       if (res.data?.inserted_id) {
