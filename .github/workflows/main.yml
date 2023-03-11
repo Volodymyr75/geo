@@ -3,7 +3,7 @@ name: Deploy
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   build:
@@ -15,4 +15,5 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: 'geo-strembovskiy' #Must be unique in Heroku
           heroku_email: 'strembov@gmail.com'
+          usedoker: true
           appdir: 'api' # <- This will point to the api folder in your project
