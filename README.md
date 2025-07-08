@@ -51,3 +51,6 @@ All endpoints are prefixed with `/travels/v1`.
 *   `POST /new-weather`: Fetches new weather data.
 *   `GET, POST, DELETE, PUT /weathers`: Manages saved weather lookups.
 *   `/smoke`: A simple smoke test endpoint.
+
+---
+<small>This README.md file was created and sent using the Gemini CLI.</small>
