@@ -5,25 +5,45 @@ import Container from 'react-bootstrap/Container'
 import SearchWeather from '../components/SearchWeather'
 import WeatherCard from '../components/WeatherCard'
 import { Col, Row } from 'react-bootstrap'
+import { useAxios } from '../hooks/use-http'
 
 const URL_BACK = process.env.REACT_APP_URL_BACK
 
-function Weather() {
+function Temp() {
   const [weathers, setWeather] = useState([])
   const latRef = useRef()
   const lonRef = useRef()
   const [errors, setErrors] = useState({})
 
+  // useEffect(() => {
+  //   ;(async function () {
+  //     try {
+  //       const res = await axios.get(`${URL_BACK}weathers`)
+  //       setWeather(res.data || [])
+  //     } catch (error) {
+  //       console.log(error)
+  //     }
+  //   })()
+  // }, [])
+  const { response, loading, error } = useAxios({
+    method: 'GET',
+    url: `${URL_BACK}weathers`,
+    headers: {
+      // no need to stringify
+      accept: '*/*',
+    },
+  })
   useEffect(() => {
-    ;(async function () {
-      try {
-        const res = await axios.get(`${URL_BACK}weathers`)
-        setWeather(res.data || [])
-      } catch (error) {
-        console.log(error)
-      }
-    })()
-  }, [])
+    if (response) {
+      setWeather(response)
+    } else {
+      setWeather([])
+    }
+  }, [response])
+
+  console.log('ok ok ok')
+
+  // setWeather(response.data || [])
 
   const handleSearchSubmit = async (e) => {
     e.preventDefault()
@@ -142,4 +162,45 @@ function Weather() {
   )
 }
 
-export default Weather
+export default Temp
+
+// import { useAxios } from 'axioshook';
+
+// const App = () => {
+//     const { response, loading, error } = useAxios({
+//         method: 'POST',
+//         url: '/posts',
+//         headers: { // no need to stringify
+//           accept: '*/*'
+//         },
+//         data: {  // no need to stringify
+//             userId: 1,
+//             id: 19392,
+//             title: 'title',
+//             body: 'Sample text',
+//         },
+//     });
+
+//     return (
+//         <div className='App'>
+//             <h1>Posts</h1>
+
+//             {loading ? (
+//                 <p>loading...</p>
+//             ) : (
+//                 <div>
+//                     {error && (
+//                         <div>
+//                             <p>{error.message}</p>
+//                         </div>
+//                     )}
+//                     <div> {
+//                       // no need to use another state to store data, response is sufficient
+//                       response && <p>{response.id}</p>
+//                     }
+//                     </div>
+//                 </div>
+//             )}
+//         </div>
+//     );
+// };

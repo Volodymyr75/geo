@@ -20,6 +20,9 @@ const Header = (props) => {
           <Nav.Link as={Link} to="weather">
             Weather
           </Nav.Link>
+          <Nav.Link as={Link} to="temp">
+            Temp
+          </Nav.Link>
         </Nav>
       </Container>
     </Navbar>

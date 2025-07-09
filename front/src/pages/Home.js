@@ -6,6 +6,7 @@ import DistanseCard from '../components/DistanceCard'
 import Container from 'react-bootstrap/Container'
 
 const MAPBOX_TOKEN = process.env.REACT_APP_MAPBOX_TOKEN
+const URL_BACK = process.env.REACT_APP_URL_BACK
 
 const Home = () => {
   const [coordinate, setCoordinate] = useState({
@@ -22,7 +23,7 @@ const Home = () => {
       try {
         const res = await axios.get(
           // 'http://localhost:5050/travels/v1/distances'
-          'https://strembovskyi-geo.onrender.com/travels/v1/distances'
+          `${URL_BACK}distances`
         )
         setDistance(res.data || [])
       } catch (error) {
@@ -44,7 +45,7 @@ const Home = () => {
       try {
         const res = await axios.post(
           // 'http://localhost:5050/travels/v1/new-distance',
-          'https://strembovskyi-geo.onrender.com/travels/v1/new-distance',
+          `${URL_BACK}new-distance`,
           coordinate
         )
         setDistance([res.data, ...distances])
@@ -96,7 +97,7 @@ const Home = () => {
     try {
       const res = await axios.post(
         // 'http://localhost:5050/travels/v1/distances',
-        'https://strembovskyi-geo.onrender.com/travels/v1/distances',
+        `${URL_BACK}distances`,
         distanceToBeSaved
       )
       if (res.data?.inserted_id) {
@@ -118,7 +119,7 @@ const Home = () => {
     try {
       const res = await axios.delete(
         // 'http://localhost:5050/travels/v1/distances',
-        'https://strembovskyi-geo.onrender.com/travels/v1/distances',
+        `${URL_BACK}distances`,
         { data: { id: id } }
       )
       console.log(res.data)
